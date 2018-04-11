@@ -9,6 +9,7 @@ def readme():
 
 setup(
     name='fortiosapi',
+    zip_safe=False,
     version='0.9.91',
     description=('Python modules to interact with fortinet'
                  ' products configuration rest and ssh'),

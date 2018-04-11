@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/root/fortinet/bin/python
 import logging
 import pprint
 
@@ -18,10 +18,11 @@ fgt = FortiOSAPI()
 def main():
     # Login to the FGT ip
     fgt.debug('on')
-    fgthost = '10.10.10.125'
-    user = 'admin'
-    passwd = 'toto'
-    resp = fgt.login(fgthost, user, passwd)
+    fgthost = '172.16.100.253:10443'
+    user = 'tony1'
+    passwd = '1qaz@WSX'
+    vdom = 'root'
+    resp = fgt.login(fgthost, user, passwd, vdom)
     pp = pprint.PrettyPrinter(indent=4)
     resp = fgt.license()
     pp = pprint.PrettyPrinter(indent=4)

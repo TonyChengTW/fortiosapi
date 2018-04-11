@@ -34,6 +34,8 @@ import time
 import paramiko
 import requests
 
+import pdb
+
 try:  # Python 2.7+
     from logging import NullHandler
 except ImportError:
@@ -106,7 +108,7 @@ class FortiOSAPI(object):
                 self._session.headers.update({'X-CSRFTOKEN': csrftoken})
                 LOG.debug("csrftoken after update  : %s ", csrftoken)
 
-    def login(self, host, username, password):
+    def login(self, host, username, password, vdom):
         self.host = host
         if self._https is True:
             self.url_prefix = 'https://' + self.host
@@ -124,10 +126,10 @@ class FortiOSAPI(object):
             self.update_cookie()
         else:
             raise Exception('login failed')
-        try:
-            self._fortiversion = self.monitor('system', 'interface')['version']
-        except:
-            raise Exception('can not get following login')
+        #try:
+        #    self._fortiversion = self.monitor('system', 'interface', vdom)['version']
+        #except:
+        #    raise Exception('can not get following login')
         # Might be wise to return the license status here
 
     def get_version(self):
@@ -135,6 +137,7 @@ class FortiOSAPI(object):
 
     def get_mkey(self, path, name, vdom=None, data=None):
         # retreive the table mkey from schema
+        pdb.set_trace()
         schema = self.schema(path, name, vdom=None)
         try:
             keyname = schema['mkey']

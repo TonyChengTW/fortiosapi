@@ -17,15 +17,16 @@ logger.setLevel(logging.DEBUG)
 def main():
 
     # Parse for command line argument for fgt ip
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         # Requires fgt ip and password
-        print "Please specify fgt ip address"
+        print "firewallpolicy.py [ip] [account] [password]"
         exit()
 
     # Initilize fgt connection
     ip = sys.argv[1]
+    account = sys.argv[2]
     try:
-        passwd = sys.argv[2]
+        passwd = sys.argv[3]
     except:
         passwd = ''
     #fgt = FGT(ip)
@@ -37,7 +38,7 @@ def main():
 
     fgt = FortiOSAPI()
 
-    fgt.login(ip, 'admin', passwd)
+    fgt.login(ip, account, passwd, vdom)
     data = {
         'name': "apiset",
         "scan-mode": "quick",
